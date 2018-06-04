@@ -59,8 +59,12 @@ class Display extends IComponent {
             <div class="wrapper-inner">
 
                 <div class="inputs-row">
-                    <input type="text" class="input-text" placeholder="I am looking for...">
-                    <input type="button" class="input-button" value="Search">
+                    <div>
+                        <input type="text" class="input-text" placeholder="I am looking for...">
+                    </div>
+                    <div>
+                        <input type="button" class="input-button" value="Search">
+                    </div>
                 </div>
 
             </div>

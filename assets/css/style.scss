@@ -42,20 +42,40 @@
 
         .inputs-row {
 
+            display: flex;
+            justify-content: space-between;
+
+            > div:first-child {
+
+                width: 100%;
+                margin-right: 2em;
+
+            }
+
+            > div:last-child {
+
+            }
+
             .input-text {
 
+                display: inline-block;
                 border: none;
                 border-radius: 0;
                 background: #fff;
                 outline: none;
                 border-bottom: 4px solid gray;
-                line-height: 1.1em;
+                line-height: 20px;
                 padding: 1em;
                 font-size: 20px;
 
             }
 
             .input-button {
+
+                line-height: 20px;
+                padding: 1em;
+                font-size: 20px;
+                background-color: gray;
 
             }
 
