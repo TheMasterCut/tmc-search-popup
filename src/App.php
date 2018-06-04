@@ -8,8 +8,19 @@ namespace tmc\sp\src;
  */
 
 use shellpress\v1_2_3\ShellPress;
+use tmc\sp\src\Components\Display;
+use tmc\sp\src\Components\License;
+use tmc\sp\src\Components\Settings;
+use tmc\sp\src\Components\Updates;
+use tmc_sp_apf;
 
 class App extends ShellPress {
+
+	/** @var License */
+	public $license;
+
+	/** @var Settings */
+	public $settings;
 
 	/**
 	 * Called automatically after core is ready.
@@ -23,6 +34,29 @@ class App extends ShellPress {
 		//  ----------------------------------------
 
 		$this::s()->autoloading->addNamespace( 'tmc\sp', dirname( $this::s()->getMainPluginFile() ) );
+
+		//  ----------------------------------------
+		//  Components
+		//  ----------------------------------------
+
+		$this->license = new License( $this );
+		$this->settings = new Settings( $this );
+
+		new Updates( $this );
+		new Display( $this );
+
+		//  ----------------------------------------
+		//  Options pages
+		//  ----------------------------------------
+
+		if( is_admin() && ! wp_doing_ajax() && ! wp_doing_cron() ){ //  Keep it lightweight.
+
+			$this::s()->requireFile( 'lib/tmc-admin-page-framework/admin-page-framework.php', 'TMC_v1_0_3_AdminPageFramework' );
+			$this::s()->requireFile( 'src/AdminPages/tmc_sp_apf.php' );
+
+			new tmc_sp_apf( $this::s()->options->getOptionsKey(), $this::s()->getMainPluginFile() );
+
+		}
 
 	}
 
