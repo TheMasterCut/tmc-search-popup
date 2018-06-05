@@ -3,6 +3,8 @@ jQuery( document ).ready( function( $ ) {
     var popupRootEl     = $( '#tmc_sp_root' );      //  Popup main object.
     var popupCloseEls   = $( '#tmc_sp_close' );     //  Close buttons.
     var popupOpenEls    = $( '#adminbar-search' );  //  Open buttons.
+    var popupFormEl     = $( '#tmc_sp_form' );      //  Form.
+    var popupResultsEl  = $( '#tmc_sp_results' );   //  Results div.
 
     if( ! popupRootEl ){
         console.log( 'Search popup could not initialize elements.' );
@@ -17,6 +19,11 @@ jQuery( document ).ready( function( $ ) {
     popupCloseEls.click( function( event ) {
         event.preventDefault();
         deactivatePopup();
+    } );
+
+    popupFormEl.submit( function( event ) {
+        event.preventDefault();
+        sendForm();
     } );
 
     //  ----------------------------------------
@@ -34,6 +41,17 @@ jQuery( document ).ready( function( $ ) {
 
         popupRootEl.removeClass( 'is-active' );
         $( 'body' ).removeClass( 'noscroll' );
+
+    }
+
+    function sendForm() {
+
+        popupRootEl.addClass( 'has-results' );
+        popupResultsEl.html( '' );
+
+        for( var i = 0; i < 50; i++ ){
+            popupResultsEl.append( '<p>AAAAAA</p>' );
+        }
 
     }
 

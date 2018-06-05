@@ -7,16 +7,20 @@ body.noscroll {
 
 .tmc_sp_root {
 
+    $popupRoot: &;  //  THIS reference.
+
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
+    max-height: 100%;
+    display: block;
     visibility: visible;
     background-color: #ffffff;
     transition: 500ms all;
     z-index: 999999;
+    overflow: auto;
 
     &:not( .is-active ){
 
@@ -26,29 +30,43 @@ body.noscroll {
 
     }
 
-    @at-root .admin-bar & {
-
-        padding-top: 4em;
-
-    }
-
     .close-root {
 
-        position: absolute;
-        top: 1em;
-        right: 1em;
-        cursor: pointer;
+        display: block;
+        width: 100%;
+        padding: 1.5em;
+        text-align: right;
+
+        .close {
+
+            cursor: pointer;
+            display: inline-block;
+
+        }
 
     }
 
     .wrapper-inner {
 
         display: block;
-        margin: auto;
         padding: 1.5em;
-        max-width: 900px;
+        margin: auto;
         width: 100%;
-        background-color: white;
+        max-width: 900px;
+        transition: 500ms all;
+
+        @media only screen and ( min-width: 1000px ) {
+
+            position: absolute;
+            top: calc( 50% - 70px );
+            left: 50%;
+            transform: translate( -50%, 0 );
+
+        }
+
+        @at-root #{$popupRoot}.has-results .wrapper-inner {
+            top: 0;
+        }
 
         .inputs-row {
 
@@ -102,6 +120,12 @@ body.noscroll {
                 }
 
             }
+
+        }
+
+        .results {
+
+            margin-top: 2em;
 
         }
 

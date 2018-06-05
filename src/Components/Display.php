@@ -53,9 +53,14 @@ class Display extends IComponent {
 
 		<div class="tmc_sp_root" id="tmc_sp_root">
 
-            <span class="close-root" id="tmc_sp_close">
-                <img width="32px" height="32px" src="<?php echo $this::s()->getUrl( 'assets/img/cross-remove-sign.svg' ); ?>">
-            </span>
+            <div class="close-root">
+
+                <span class="close" id="tmc_sp_close">
+                    <img width="32px" height="32px" src="<?php echo $this::s()->getUrl( 'assets/img/cross-remove-sign.svg' ); ?>">
+                </span>
+
+            </div>
+
             <div class="wrapper-inner">
 
                 <form id="tmc_sp_form">
@@ -64,10 +69,14 @@ class Display extends IComponent {
                             <input type="text" class="input-text" placeholder="I am looking for...">
                         </div>
                         <div>
-                            <input type="button" class="input-button" value="Search">
+                            <input type="submit" class="input-button" value="Search">
                         </div>
                     </div>
                 </form>
+
+                <div class="results" id="tmc_sp_results">
+
+                </div>
 
             </div>
 
