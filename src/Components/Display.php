@@ -51,21 +51,23 @@ class Display extends IComponent {
 
 		?>
 
-		<div class="tmc_sp_root is-active">
+		<div class="tmc_sp_root" id="tmc_sp_root">
 
-            <span class="close-root">
+            <span class="close-root" id="tmc_sp_close">
                 <img width="32px" height="32px" src="<?php echo $this::s()->getUrl( 'assets/img/cross-remove-sign.svg' ); ?>">
             </span>
             <div class="wrapper-inner">
 
-                <div class="inputs-row">
-                    <div>
-                        <input type="text" class="input-text" placeholder="I am looking for...">
+                <form id="tmc_sp_form">
+                    <div class="inputs-row">
+                        <div>
+                            <input type="text" class="input-text" placeholder="I am looking for...">
+                        </div>
+                        <div>
+                            <input type="button" class="input-button" value="Search">
+                        </div>
                     </div>
-                    <div>
-                        <input type="button" class="input-button" value="Search">
-                    </div>
-                </div>
+                </form>
 
             </div>
 
@@ -87,6 +89,8 @@ class Display extends IComponent {
 	    if( ! $this->shouldDisplayPopup() ) return;
 
 	    wp_enqueue_style( 'tmc_sp_style', $this::s()->getUrl( 'assets/css/style.css' ), array(), $this::s()->getFullPluginVersion() );
+
+	    wp_enqueue_script( 'tmc_sp_search', $this::s()->getUrl( 'assets/js/front.js' ), array( 'jquery' ), $this::s()->getFullPluginVersion(), true );
 
     }
 
