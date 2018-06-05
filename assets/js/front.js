@@ -49,10 +49,6 @@ jQuery( document ).ready( function( $ ) {
         popupRootEl.addClass( 'has-results' );
         popupResultsEl.html( '' );
 
-        for( var i = 0; i < 50; i++ ){
-            popupResultsEl.append( '<p>AAAAAA</p>' );
-        }
-
     }
 
 } );
