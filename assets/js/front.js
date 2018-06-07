@@ -3,12 +3,14 @@ jQuery( document ).ready( function( $ ) {
     var popup = {
 
         'elems':            {
-            "rootEl":      $( '#tmc_sp_root' ),        //  Popup main object.
-            "closeEls":    $( '#tmc_sp_close' ),       //  Close buttons.
-            "openEls":     $( '#adminbar-search' ),    //  Open buttons.
-            "formEl":      $( '#tmc_sp_form' ),        //  Form.
-            "resultsEl":   $( '#tmc_sp_results' )      //  Results div.
+            "rootEl":       $( '#tmc_sp_root' ),            //  Popup main object.
+            "closeEls":     $( '#tmc_sp_close' ),           //  Close buttons.
+            "openEls":      $( '#adminbar-search' ),        //  Open buttons.
+            "formEl":       $( '#tmc_sp_form' ),            //  Form.
+            "submitBtnEl":  $( '#tmc_sp_submit_button' ),   //  Main submit.
+            "resultsEl":    $( '#tmc_sp_results' )          //  Results div.
         },
+        'isLocked':         false,
 
         /**
          * Initializes whole mechanism.
@@ -34,14 +36,16 @@ jQuery( document ).ready( function( $ ) {
 
             popup.elems.formEl.submit( function(event ) {
                 event.preventDefault();
-                popup.sendForm();
+
+                if( ! popup.isLocked ){
+                    popup.sendForm();
+                }
+
             } );
 
         },
 
         /**
-         *
-         *
          * @return void
          */
         activatePopup:      function() {
@@ -51,6 +55,9 @@ jQuery( document ).ready( function( $ ) {
 
         },
 
+        /**
+         * @return void
+         */
         deactivatePopup:    function() {
 
             popup.elems.rootEl.removeClass( 'is-active' );
@@ -58,10 +65,48 @@ jQuery( document ).ready( function( $ ) {
 
         },
 
+        /**
+         * @return void
+         */
         sendForm:           function() {
 
-            popup.elems.rootEl.addClass( 'has-results' );
-            popup.elems.resultsEl.html( '' );
+            popup.isLocked = true;
+
+            popup.elems.resultsEl.empty();   //  Clear results.
+
+            //  Save button value to variable.
+
+            var buttonDefVal = popup.elems.submitBtnEl.val();
+
+            popup.elems.submitBtnEl.prop( 'disabled', true ).val( popup.elems.submitBtnEl.attr( 'data-loadingText' ) );
+            popup.elems.rootEl.removeClass( 'has-results' );
+
+            //  Make request.
+
+            var data = popup.elems.formEl.serializeArray(); //  Serialize form data as array and pass it to ajax query.
+
+            setTimeout( function() {
+                $.post( popup.elems.formEl.attr( 'action' ), data )
+                    .done( function( result ) {
+
+                        popup.elems.resultsEl.html( result );
+
+                        popup.elems.rootEl.addClass( 'has-results' );
+
+                    } )
+                    .fail( function( result ) {
+
+                        popup.elems.resultsEl.empty();
+
+                    } )
+                    .always( function( result ) {
+
+                        popup.elems.submitBtnEl.prop( 'disabled', false ).val( buttonDefVal );
+
+                        popup.isLocked = false;
+
+                    } );
+            }, 500 );
 
         }
 
