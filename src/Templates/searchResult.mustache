@@ -1,0 +1,24 @@
+{{#results}}
+    <div class="result">
+
+        <a class="title" href="{{url}}">
+            <h3>{{title}}</h3>
+        </a>
+
+        {{#thumbnail}}
+            <a class="thumb" href="{{url}}">
+                <img src="{{thumbnail}}">
+            </a>
+        {{/thumbnail}}
+
+        <div class="excerpt">{{excerpt}}</div>
+
+    </div>
+{{/results}}
+{{^results}}
+    <div class="empty-result">
+
+        Sorry. No results found :(
+
+    </div>
+{{/results}}

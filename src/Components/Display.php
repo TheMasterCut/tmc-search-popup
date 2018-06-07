@@ -8,6 +8,7 @@ namespace tmc\sp\src\Components;
  */
 
 use shellpress\v1_2_3\src\Shared\Components\IComponent;
+use WP_Query;
 
 class Display extends IComponent {
 
@@ -74,7 +75,7 @@ class Display extends IComponent {
 
                     <div class="inputs-row">
                         <div>
-                            <input type="text" name="search" class="input-text" placeholder="I am looking for...">
+                            <input type="text" name="search" autocomplete="off" class="input-text" placeholder="I am looking for...">
                         </div>
                         <div>
                             <input type="submit" class="input-button" id="tmc_sp_submit_button" data-loadingText="Searching..." value="Search">
@@ -83,7 +84,7 @@ class Display extends IComponent {
                 </form>
 
                 <div class="results" id="tmc_sp_results">
-
+                    <!-- HERE GOES RESULTS -->
                 </div>
 
             </div>
@@ -112,21 +113,51 @@ class Display extends IComponent {
     }
 
 	/**
-     * Res
+     * Prepares HTML for ajax request.
      *
 	 * @return void
 	 */
     public function _a_submitAjaxCallback() {
 
-        ob_start();
+        //  ----------------------------------------
+        //  Prepare query
+        //  ----------------------------------------
 
-        echo '<pre>';
-        var_export( $_REQUEST );
-        echo '</pre>';
+        $query = new WP_Query( array(
+            'post_type'     =>  'post',
+            's'             =>  sanitize_text_field( $_REQUEST['search'] )
+        ) );
 
-        $msg = ob_get_clean();
+        //  ----------------------------------------
+        //  Pack data
+        //  ----------------------------------------
 
-        wp_die( $msg );
+        $templateData = array(
+            'results'   =>  array()
+        );
+
+        while( $query->have_posts() ){
+
+            $query->the_post();
+
+            $templateData['results'][] = array(
+                'title'     =>  get_the_title(),
+                'excerpt'   =>  has_excerpt() ? get_the_excerpt() : wp_trim_excerpt(),
+                'url'       =>  get_the_permalink(),
+                'thumbnail' =>  get_the_post_thumbnail_url( null, 'thumbnail' )
+            );
+
+            wp_reset_postdata();
+
+        }
+
+        //  ----------------------------------------
+        //  Render HTML
+        //  ----------------------------------------
+
+        $html = $this::s()->mustache->render( 'src/Templates/searchResult.mustache', $templateData );
+
+        wp_die( $html );    //  Send ajax response.
 
     }
 

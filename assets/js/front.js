@@ -5,7 +5,7 @@ jQuery( document ).ready( function( $ ) {
         'elems':            {
             "rootEl":       $( '#tmc_sp_root' ),            //  Popup main object.
             "closeEls":     $( '#tmc_sp_close' ),           //  Close buttons.
-            "openEls":      $( '#adminbar-search' ),        //  Open buttons.
+            "openEls":      $( '#adminbar-search, .site-description' ),        //  Open buttons.
             "formEl":       $( '#tmc_sp_form' ),            //  Form.
             "submitBtnEl":  $( '#tmc_sp_submit_button' ),   //  Main submit.
             "resultsEl":    $( '#tmc_sp_results' )          //  Results div.
@@ -106,7 +106,7 @@ jQuery( document ).ready( function( $ ) {
                         popup.isLocked = false;
 
                     } );
-            }, 500 );
+            }, 100 );
 
         }
 
