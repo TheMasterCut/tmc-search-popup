@@ -1,54 +1,72 @@
 jQuery( document ).ready( function( $ ) {
 
-    var popupRootEl     = $( '#tmc_sp_root' );      //  Popup main object.
-    var popupCloseEls   = $( '#tmc_sp_close' );     //  Close buttons.
-    var popupOpenEls    = $( '#adminbar-search' );  //  Open buttons.
-    var popupFormEl     = $( '#tmc_sp_form' );      //  Form.
-    var popupResultsEl  = $( '#tmc_sp_results' );   //  Results div.
+    var popup = {
 
-    if( ! popupRootEl ){
-        console.log( 'Search popup could not initialize elements.' );
-        return;
-    }
+        'elems':            {
+            'popupRootEl':      $( '#tmc_sp_root' ),        //  Popup main object.
+            'popupCloseEls':    $( '#tmc_sp_close' ),       //  Close buttons.
+            'popupOpenEls':     $( '#adminbar-search' ),    //  Open buttons.
+            'popupFormEl':      $( '#tmc_sp_form' ),        //  Form.
+            'popupResultsEl':   $( '#tmc_sp_results' )      //  Results div.
+        },
 
-    popupOpenEls.click( function( event ) {
-        event.preventDefault();
-        activatePopup();
-    } );
+        /**
+         * Initializes whole mechanism.
+         *
+         * @return void
+         */
+        init:               function() {
 
-    popupCloseEls.click( function( event ) {
-        event.preventDefault();
-        deactivatePopup();
-    } );
+            if( ! popup.elems.popupRootEl ){
+                console.log( 'Search Popup TMC could not initialize elements.' );
+                return;
+            }
 
-    popupFormEl.submit( function( event ) {
-        event.preventDefault();
-        sendForm();
-    } );
+            popup.elems.popupOpenEls.click( function( event ) {
+                event.preventDefault();
+                popup.activatePopup();
+            } );
 
-    //  ----------------------------------------
-    //  Functions
-    //  ----------------------------------------
+            popup.elems.popupCloseEls.click( function( event ) {
+                event.preventDefault();
+                popup.deactivatePopup();
+            } );
 
-    function activatePopup() {
+            popup.elems.popupFormEl.submit( function( event ) {
+                event.preventDefault();
+                popup.sendForm();
+            } );
 
-        popupRootEl.addClass( 'is-active' );
-        $( 'body' ).addClass( 'noscroll' );
+        },
 
-    }
+        /**
+         *
+         *
+         * @return void
+         */
+        activatePopup:      function() {
 
-    function deactivatePopup() {
+            popup.elems.popupRootEl.addClass( 'is-active' );
+            $( 'body' ).addClass( 'noscroll' );
 
-        popupRootEl.removeClass( 'is-active' );
-        $( 'body' ).removeClass( 'noscroll' );
+        },
 
-    }
+        deactivatePopup:    function() {
 
-    function sendForm() {
+            popup.elems.popupRootEl.removeClass( 'is-active' );
+            $( 'body' ).removeClass( 'noscroll' );
 
-        popupRootEl.addClass( 'has-results' );
-        popupResultsEl.html( '' );
+        },
 
-    }
+        sendForm:           function() {
+
+            popup.elems.popupRootEl.addClass( 'has-results' );
+            popup.elems.popupResultsEl.html( '' );
+
+        }
+
+    };
+
+    popup.init();
 
 } );
