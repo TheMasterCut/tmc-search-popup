@@ -38,7 +38,15 @@ class TabBasics extends AdminPageTab {
 		$this->pageFactory->addSettingSections(
 			array(
 				'section_id'        =>  'appearance',
-				'title'             =>  __( 'Appearance', 'tmc_sp' )
+				'title'             =>  __( 'Appearance', 'tmc_sp' ),
+				'page_slug'         =>  $this->pageSlug,
+				'tab_slug'          =>  $this->tabSlug,
+			),
+			array(
+				'section_id'        =>  'content',
+				'title'             =>  __( 'Content', 'tmc_sp' ),
+				'page_slug'         =>  $this->pageSlug,
+				'tab_slug'          =>  $this->tabSlug,
 			)
 		);
 
@@ -52,6 +60,44 @@ class TabBasics extends AdminPageTab {
 				'field_id'          =>  'bgColor',
 				'type'              =>  'color',
 				'title'             =>  __( 'Background color', 'tmc_sp' )
+			),
+			array(
+				'field_id'          =>  'textColor',
+				'type'              =>  'color',
+				'title'             =>  __( 'Text color',   'tmc_sp' )
+			),
+			array(
+				'field_id'          =>  'colorAccentPrimary',
+				'type'              =>  'color',
+				'title'             =>  __( 'Primary accent',   'tmc_sp' )
+			)
+		);
+
+		$this->pageFactory->addSettingFields(
+			'content',
+			array(
+				'field_id'          =>  'inputSearchTextPlaceholder',
+				'type'              =>  'text',
+				'title'             =>  __( 'Search placeholder', 'tmc_sp' ),
+				'attributes'        =>  array(
+					'class'             =>  'regular-text'
+				)
+			),
+			array(
+				'field_id'          =>  'inputSearchButtonText',
+				'type'              =>  'text',
+				'title'             =>  __( 'Search button text' ),
+				'attributes'        =>  array(
+					'class'             =>  'regular-text'
+				)
+			),
+			array(
+				'field_id'          =>  'inputSearchButtonLoadingText',
+				'type'              =>  'text',
+				'title'             =>  __( 'Search button loading', 'tmc_sp' ),
+				'attributes'        =>  array(
+					'class'             =>  'regular-text'
+				)
 			)
 		);
 

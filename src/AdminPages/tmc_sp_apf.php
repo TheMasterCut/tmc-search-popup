@@ -19,6 +19,7 @@ class tmc_sp_apf extends TMC_v1_0_3_AdminPageFramework {
 		//  ----------------------------------------
 
 		$this->oProp->bShowDebugInfo = false;
+		$this->setInPageTabTag( 'h2' );
 
 		$this->setRootMenuPage( 'Settings' );
 		$this->addSubMenuItem(
