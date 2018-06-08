@@ -7,7 +7,7 @@ namespace tmc\sp\src;
  * Time: 12:02
  */
 
-use shellpress\v1_2_3\ShellPress;
+use shellpress\v1_2_4\ShellPress;
 use tmc\sp\src\Components\Display;
 use tmc\sp\src\Components\License;
 use tmc\sp\src\Components\Settings;
@@ -39,8 +39,8 @@ class App extends ShellPress {
 		//  Components
 		//  ----------------------------------------
 
-		$this->license = new License( $this );
 		$this->settings = new Settings( $this );
+		$this->license = new License( $this );
 
 		new Updates( $this );
 		new Display( $this );

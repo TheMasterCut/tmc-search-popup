@@ -7,7 +7,7 @@ namespace tmc\sp\src\Components;
  * Time: 12:57
  */
 
-use shellpress\v1_2_3\src\Shared\Components\LicenseManagerSLM;
+use shellpress\v1_2_4\src\Shared\Components\LicenseManagerSLM;
 
 class License extends LicenseManagerSLM {
 

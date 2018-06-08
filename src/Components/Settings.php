@@ -8,7 +8,7 @@ namespace tmc\sp\src\Components;
  * Time: 13:18
  */
 
-use shellpress\v1_2_3\src\Shared\Components\IComponent;
+use shellpress\v1_2_4\src\Shared\Components\IComponent;
 
 class Settings extends IComponent {
 
@@ -112,10 +112,9 @@ class Settings extends IComponent {
 	 */
 	public function _a_fillSettingsOnPluginActivation() {
 
-		$this::s()->log->info( 'Filled settings differences.' );
-//		$this::s()->log->info( 'options:', $this::s()->options->getDefaultOptions() );
+		$this::s()->log->info( 'Filled settings differences.', $this::s()->options->getDefaultOptions() );
 
-		$this::s()->options->fillDifferencies( $this::s()->options->getDefaultOptions() );
+		$this::s()->options->fillDifferencies();
 		$this::s()->options->flush();
 
 	}

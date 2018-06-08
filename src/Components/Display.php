@@ -7,7 +7,7 @@ namespace tmc\sp\src\Components;
  * Time: 13:21
  */
 
-use shellpress\v1_2_3\src\Shared\Components\IComponent;
+use shellpress\v1_2_4\src\Shared\Components\IComponent;
 use WP_Query;
 
 class Display extends IComponent {
