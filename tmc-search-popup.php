@@ -4,6 +4,7 @@
  * Description: Easy to setup, lightweight front-end search solution.
  * Version:     1.0.1
  * Plugin URI:  https://themastercut.co
+ * Author URI:  https://themastercut.co
  * Author:      TheMasterCut.co
  * License:     GPL-2.0+
  * Text Domain: tmc_sp

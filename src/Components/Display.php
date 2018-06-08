@@ -132,9 +132,7 @@ class Display extends IComponent {
         //  Pack data
         //  ----------------------------------------
 
-        $templateData = array(
-            'results'   =>  array()
-        );
+        $templateData = array();    //  Data passed to mustache engine.
 
         while( $query->have_posts() ){
 

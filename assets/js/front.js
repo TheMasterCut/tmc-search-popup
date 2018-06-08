@@ -3,21 +3,39 @@ jQuery( document ).ready( function( $ ) {
     var popup = {
 
         'elems':            {
-            "rootEl":       $( '#tmc_sp_root' ),            //  Popup main object.
-            "closeEls":     $( '#tmc_sp_close' ),           //  Close buttons.
-            "openEls":      $( '#adminbar-search, .site-description' ),        //  Open buttons.
-            "formEl":       $( '#tmc_sp_form' ),            //  Form.
-            "submitBtnEl":  $( '#tmc_sp_submit_button' ),   //  Main submit.
-            "resultsEl":    $( '#tmc_sp_results' )          //  Results div.
+            "rootEl":           null,   //  Popup main object.
+            "closeEls":         null,   //  Close buttons.
+            "openEls":          null,   //  Open buttons.
+            "formEl":           null,   //  Form.
+            "submitBtnEl":      null,   //  Main submit.
+            "resultsEl":        null    //  Results div.
         },
         'isLocked':         false,
+
+        /**
+         * Initializes querying elements.
+         *
+         * @return void
+         */
+        initSelectors:              function() {
+
+            popup.elems = {
+                "rootEl":       $( '#tmc_sp_root' ),
+                "closeEls":     $( '#tmc_sp_close' ),
+                "openEls":      $( '#adminbar-search' ),
+                "formEl":       $( '#tmc_sp_form' ),
+                "submitBtnEl":  $( '#tmc_sp_submit_button' ),
+                "resultsEl":    $( '#tmc_sp_results' )
+            }
+
+        },
 
         /**
          * Initializes whole mechanism.
          *
          * @return void
          */
-        init:               function() {
+        initMethods:               function() {
 
             if( ! popup.elems.rootEl ){
                 console.log( 'Search Popup TMC could not initialize elements.' );
@@ -112,6 +130,7 @@ jQuery( document ).ready( function( $ ) {
 
     };
 
-    popup.init();
+    popup.initSelectors();
+    popup.initMethods();
 
 } );
