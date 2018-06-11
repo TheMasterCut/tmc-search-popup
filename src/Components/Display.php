@@ -146,7 +146,7 @@ class Display extends IComponent {
         //  ----------------------------------------
 
         $query = new WP_Query( array(
-            'post_type'     =>  'post',
+            'post_type'     =>  App::i()->settings->getSupportedPostTypes(),
             's'             =>  sanitize_text_field( $_REQUEST['search'] )
         ) );
 
@@ -163,12 +163,13 @@ class Display extends IComponent {
 
             $query->the_post();
 
-            $thumbUrl = get_the_post_thumbnail_url( null, 'thumbnail' );
-            $thumbPos = App::i()->settings->getThumbnailsPosition();
+            $thumbUrl   = get_the_post_thumbnail_url( null, 'thumbnail' );
+            $thumbPos   = App::i()->settings->getThumbnailsPosition();
+            $excerpt    = has_excerpt() ? get_the_excerpt() : wp_trim_excerpt();
 
             $templateData['results'][] = array(
                 'title'         =>  get_the_title(),
-                'excerpt'       =>  has_excerpt() ? get_the_excerpt() : wp_trim_excerpt(),
+                'excerpt'       =>  strip_shortcodes( $excerpt ),
                 'url'           =>  get_the_permalink(),
                 'hasThumb'      =>  $thumbUrl && $thumbPos,
                 'thumbUrl'      =>  $thumbUrl,

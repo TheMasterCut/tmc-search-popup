@@ -8,6 +8,7 @@ namespace tmc\sp\src\AdminPages;
  */
 
 use shellpress\v1_2_4\src\Shared\AdminPageFramework\AdminPageTab;
+use WP_Post_Type;
 
 class TabBasics extends AdminPageTab {
 
@@ -37,6 +38,12 @@ class TabBasics extends AdminPageTab {
 
 		$this->pageFactory->addSettingSections(
 			array(
+				'section_id'        =>  'searching',
+				'title'             =>  __( 'Searching', 'tmc_sp' ),
+				'page_slug'         =>  $this->pageSlug,
+				'tab_slug'          =>  $this->tabSlug,
+			),
+			array(
 				'section_id'        =>  'appearance',
 				'title'             =>  __( 'Appearance', 'tmc_sp' ),
 				'page_slug'         =>  $this->pageSlug,
@@ -65,6 +72,16 @@ class TabBasics extends AdminPageTab {
 		//  ----------------------------------------
 		//  Fields
 		//  ----------------------------------------
+
+		$this->pageFactory->addSettingFields(
+			'searching',
+			array(
+				'field_id'          =>  'postTypes',
+				'type'              =>  'checkbox',
+				'title'             =>  __( 'Post types', 'tmc_sp' ),
+				'label'             =>  $this->getAllPostTypesNames()
+			)
+		);
 
 		$this->pageFactory->addSettingFields(
 			'appearance',
@@ -143,6 +160,34 @@ class TabBasics extends AdminPageTab {
 				'save'              =>  false
 			)
 		);
+
+	}
+
+	/**
+	 * Returns array of keys => value post types.
+	 *
+	 * @return array
+	 */
+	private function getAllPostTypesNames() {
+
+		/** @var WP_Post_Type[] $postTypesObjects */
+		$postTypesObjects = get_post_types( array( 'public' => true ), 'objects' );
+
+		$postTypes      = array();
+		$excludeList    = array( 'attachment' );
+
+		foreach( $postTypesObjects as $postType ){
+			if( ! in_array( $postType->name, $excludeList ) ){  //  Exclude if in list
+
+				$postTypes[ $postType->name ] = sprintf( '<span  style="display: inline-block; width: 150px; margin-right: 1em;">%1$s</span> <i>( %2$s )</i>',
+					$postType->label,
+					$postType->name
+				);
+
+			}
+		}
+
+		return $postTypes;
 
 	}
 

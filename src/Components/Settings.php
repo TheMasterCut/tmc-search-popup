@@ -21,6 +21,11 @@ class Settings extends IComponent {
 
 		$this::s()->options->setDefaultOptions(
 			array(
+				'searching'                     =>  array(
+					'postTypes'                     =>  array(
+						'post'                          =>  1
+					)
+				),
 				'appearance'                    =>  array(
 					'bgColor'                       =>  '#ffffff',
 					'textColor'                     =>  '#000000',
@@ -33,7 +38,7 @@ class Settings extends IComponent {
 					'inputSearchTextPlaceholder'    =>  __( 'I am looking for...', 'tmc_sp' ),
 					'inputSearchButtonText'         =>  __( 'Search', 'tmc_sp' ),
 					'inputSearchButtonLoadingText'  =>  __( 'Searching...', 'tmc_sp' ),
-					'noResultsFoundText'            =>  __( 'Sorry. No results found :(', 'tmc_sp' ),
+					'noResultsFoundText'            =>  __( 'No results found.', 'tmc_sp' ),
 				)
 			)
 		);
@@ -116,6 +121,26 @@ class Settings extends IComponent {
 		} else {
 			return $option;
 		}
+
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getSupportedPostTypes() {
+
+		$postTypes  = (array) $this::s()->options->get( 'searching/postTypes' );
+		$supported  = array();
+
+		foreach( $postTypes as $type => $value ){
+
+			if( $value ){
+				$supported[] = $type;
+			}
+
+		}
+
+		return $supported;
 
 	}
 
