@@ -43,10 +43,22 @@ class TabBasics extends AdminPageTab {
 				'tab_slug'          =>  $this->tabSlug,
 			),
 			array(
+				'section_id'        =>  'thumbnails',
+				'title'             =>  __( 'Thumbnails', 'tmc_sp' ),
+				'page_slug'         =>  $this->pageSlug,
+				'tab_slug'          =>  $this->tabSlug,
+			),
+			array(
 				'section_id'        =>  'content',
 				'title'             =>  __( 'Content', 'tmc_sp' ),
 				'page_slug'         =>  $this->pageSlug,
 				'tab_slug'          =>  $this->tabSlug,
+			),
+			array(
+				'section_id'        =>  'submit',
+				'page_slug'         =>  $this->pageSlug,
+				'tab_slug'          =>  $this->tabSlug,
+				'save'              =>  false
 			)
 		);
 
@@ -70,6 +82,20 @@ class TabBasics extends AdminPageTab {
 				'field_id'          =>  'colorAccentPrimary',
 				'type'              =>  'color',
 				'title'             =>  __( 'Primary accent',   'tmc_sp' )
+			)
+		);
+
+		$this->pageFactory->addSettingFields(
+			'thumbnails',
+			array(
+				'field_id'          =>  'position',
+				'type'              =>  'radio',
+				'title'             =>  __( 'Position', 'tmc_sp' ),
+				'label'             =>  array(
+					'right'             =>  __( 'Right', 'tmc_sp' ),
+					'left'              =>  __( 'Left', 'tmc_sp' ),
+					'disabled'          =>  __( 'Disable thumbnails', 'tmc_sp' ),
+				)
 			)
 		);
 
@@ -98,6 +124,23 @@ class TabBasics extends AdminPageTab {
 				'attributes'        =>  array(
 					'class'             =>  'regular-text'
 				)
+			),
+			array(
+				'field_id'          =>  'noResultsFoundText',
+				'type'              =>  'text',
+				'title'             =>  __( 'No results text', 'tmc_sp' ),
+				'attributes'        =>  array(
+					'class'             =>  'regular-text'
+				)
+			)
+		);
+
+		$this->pageFactory->addSettingFields(
+			'submit',
+			array(
+				'field_id'          =>  'submit',
+				'type'              =>  'submit',
+				'save'              =>  false
 			)
 		);
 

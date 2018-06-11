@@ -8,6 +8,7 @@ namespace tmc\sp\src\Components;
  */
 
 use shellpress\v1_2_4\src\Shared\Components\IComponent;
+use tmc\sp\src\App;
 use WP_Query;
 
 class Display extends IComponent {
@@ -61,9 +62,7 @@ class Display extends IComponent {
 
             <div class="close-root">
 
-                <span class="close" id="tmc_sp_close">
-                    <img width="32px" height="32px" src="<?php echo $this::s()->getUrl( 'assets/img/cross-remove-sign.svg' ); ?>">
-                </span>
+                <span class="close" id="tmc_sp_close"></span>
 
             </div>
 
@@ -75,7 +74,7 @@ class Display extends IComponent {
 
                     <div class="inputs-row">
                         <div>
-                            <input type="text" name="search" autocomplete="off" class="input-text" placeholder="I am looking for...">
+                            <input type="text" name="search" autocomplete="off" id="tmc_sp_input_text" class="input-text" placeholder="I am looking for...">
                         </div>
                         <div>
                             <input type="submit" class="input-button" id="tmc_sp_submit_button" data-loadingText="Searching..." value="Search">
@@ -110,6 +109,29 @@ class Display extends IComponent {
 
 	    wp_enqueue_script( 'tmc_sp_search', $this::s()->getUrl( 'assets/js/front.js' ), array( 'jquery' ), $this::s()->getFullPluginVersion(), true );
 
+	    ?>
+
+        <!-- BEGIN TMC SEARCH POPUP CUSTOM STYLE -->
+        <style>
+            #tmc_sp_root {
+                color:                  <?php echo App::i()->settings->getTextColor(); ?>;
+                background-color:       <?php echo App::i()->settings->getBackgroundColor(); ?>;
+            }
+            #tmc_sp_input_text {
+                border-bottom-color:    <?php echo App::i()->settings->getColorAccentPrimary(); ?>;
+            }
+            #tmc_sp_submit_button {
+                background-color:       <?php echo App::i()->settings->getColorAccentPrimary(); ?>;
+            }
+            #tmc_sp_close:before,
+            #tmc_sp_close:after {
+                background-color:       <?php echo App::i()->settings->getColorAccentPrimary(); ?>;
+            }
+        </style>
+        <!-- END TMC SEARCH POPUP CUSTOM STYLE -->
+
+        <?php
+
     }
 
 	/**
@@ -132,17 +154,25 @@ class Display extends IComponent {
         //  Pack data
         //  ----------------------------------------
 
-        $templateData = array();    //  Data passed to mustache engine.
+	    //  Data passed to mustache engine.
+        $templateData = array(
+            'noResultsText'     =>  App::i()->settings->getNoResultsFoundText()
+        );
 
         while( $query->have_posts() ){
 
             $query->the_post();
 
+            $thumbUrl = get_the_post_thumbnail_url( null, 'thumbnail' );
+            $thumbPos = App::i()->settings->getThumbnailsPosition();
+
             $templateData['results'][] = array(
-                'title'     =>  get_the_title(),
-                'excerpt'   =>  has_excerpt() ? get_the_excerpt() : wp_trim_excerpt(),
-                'url'       =>  get_the_permalink(),
-                'thumbnail' =>  get_the_post_thumbnail_url( null, 'thumbnail' )
+                'title'         =>  get_the_title(),
+                'excerpt'       =>  has_excerpt() ? get_the_excerpt() : wp_trim_excerpt(),
+                'url'           =>  get_the_permalink(),
+                'hasThumb'      =>  $thumbUrl && $thumbPos,
+                'thumbUrl'      =>  $thumbUrl,
+                'thumbPos'      =>  $thumbPos
             );
 
             wp_reset_postdata();

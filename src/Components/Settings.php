@@ -26,10 +26,14 @@ class Settings extends IComponent {
 					'textColor'                     =>  '#000000',
 					'colorAccentPrimary'            =>  '#2c3e50'
 				),
+				'thumbnails'                    =>  array(
+					'position'                      =>  'right'
+				),
 				'content'                       =>  array(
 					'inputSearchTextPlaceholder'    =>  __( 'I am looking for...', 'tmc_sp' ),
 					'inputSearchButtonText'         =>  __( 'Search', 'tmc_sp' ),
 					'inputSearchButtonLoadingText'  =>  __( 'Searching...', 'tmc_sp' ),
+					'noResultsFoundText'            =>  __( 'Sorry. No results found :(', 'tmc_sp' ),
 				)
 			)
 		);
@@ -68,15 +72,6 @@ class Settings extends IComponent {
 	/**
 	 * @return string|null
 	 */
-	public function getColorAccentSecondary() {
-
-		return $this::s()->options->get( 'appearance/colorAccentSecondary' );
-
-	}
-
-	/**
-	 * @return string|null
-	 */
 	public function getSearchPlaceholder() {
 
 		return $this::s()->options->get( 'content/inputSearchTextPlaceholder' );
@@ -98,6 +93,29 @@ class Settings extends IComponent {
 	public function getSearchButtonLoadingText() {
 
 		return $this::s()->options->get( 'content/inputSearchButtonLoadingText' );
+
+	}
+	/**
+	 * @return string|null
+	 */
+	public function getNoResultsFoundText() {
+
+		return $this::s()->options->get( 'content/noResultsFoundText' );
+
+	}
+
+	/**
+	 * @return string|bool
+	 */
+	public function getThumbnailsPosition() {
+
+		$option = $this::s()->options->get( 'thumbnails/position' );
+
+		if( ! $option || $option === 'disabled' ){
+			return false;
+		} else {
+			return $option;
+		}
 
 	}
 

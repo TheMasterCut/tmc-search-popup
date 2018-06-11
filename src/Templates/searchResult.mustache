@@ -5,11 +5,11 @@
             <h3>{{title}}</h3>
         </a>
 
-        {{#thumbnail}}
-            <a class="thumb" href="{{url}}">
-                <img src="{{thumbnail}}" alt="">
+        {{#hasThumb}}
+            <a class="thumb {{thumbPos}}" href="{{url}}">
+                <img src="{{thumbUrl}}" alt="">
             </a>
-        {{/thumbnail}}
+        {{/hasThumb}}
 
         <div class="excerpt">{{excerpt}}</div>
 
@@ -17,8 +17,6 @@
 {{/results}}
 {{^results}}
     <div class="empty-result">
-
-        Sorry. No results found :(
-
+        {{noResultsText}}
     </div>
 {{/results}}
