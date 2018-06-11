@@ -37,6 +37,8 @@ class ShortCodes extends IComponent {
 	}
 
 	/**
+	 * Renders shortcode output HTML.
+	 *
 	 * @return string
 	 */
 	public function getOpenPopupShortcode( $attrs ) {
