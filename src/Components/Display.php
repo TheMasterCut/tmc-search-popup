@@ -9,7 +9,9 @@ namespace tmc\sp\src\Components;
 
 use shellpress\v1_2_4\src\Shared\Components\IComponent;
 use tmc\sp\src\App;
+use WP_Post;
 use WP_Query;
+use WP_Term;
 
 class Display extends IComponent {
 
@@ -27,6 +29,8 @@ class Display extends IComponent {
 
 		add_action( 'wp_ajax_nopriv_' . $this::SUBMIT_AJAX_CALLBACK,    array( $this, '_a_submitAjaxCallback' ) );
 		add_action( 'wp_ajax_' . $this::SUBMIT_AJAX_CALLBACK,           array( $this, '_a_submitAjaxCallback' ) );
+
+		add_filter( 'wp_nav_menu_objects',                              array( $this, '_f_applyShortcodesOnNavMenu' ) );
 
 	}
 
@@ -187,6 +191,28 @@ class Display extends IComponent {
         $html = $this::s()->mustache->render( 'src/Templates/searchResult.mustache', $templateData );
 
         wp_die( $html );    //  Send ajax response.
+
+    }
+
+    //  ================================================================================
+    //  FILTERS
+    //  ================================================================================
+
+	/**
+	 * @param string[] $items
+	 *
+	 * @return string[]
+	 */
+    public function _f_applyShortcodesOnNavMenu( $items ) {
+
+        foreach( $items as $key => $item ){ /** @var WP_Term $item */
+            if( strpos( $item->title, ShortCodes::SHORTCODE_TAG ) ){
+                $item->title = do_shortcode( $item->title );
+                $item->url = '';
+            }
+        }
+
+        return $items;
 
     }
 

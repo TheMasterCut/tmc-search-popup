@@ -61,6 +61,16 @@ jQuery( document ).ready( function( $ ) {
 
             } );
 
+            $( document ).keyup( function( event ) {
+
+                if( event.keyCode === 27 && popup.elems.rootEl.hasClass( 'is-active' ) ){
+
+                    popup.deactivatePopup();
+
+                }
+
+            } );
+
         },
 
         /**
