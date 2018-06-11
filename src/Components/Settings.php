@@ -26,6 +26,10 @@ class Settings extends IComponent {
 						'post'                          =>  1
 					)
 				),
+				'shortcodes'                    =>  array(
+					'openBtnIcon'                   =>  $this::s()->getUrl( 'assets/img/icon-search.png' ),
+					'openBtnText'                   =>  __( 'Search', 'tmc_sp' ),
+				),
 				'appearance'                    =>  array(
 					'bgColor'                       =>  '#ffffff',
 					'textColor'                     =>  '#000000',
@@ -141,6 +145,24 @@ class Settings extends IComponent {
 		}
 
 		return $supported;
+
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getOpenButtonIconUrl() {
+
+		return $this::s()->options->get( 'shortcodes/openBtnIcon', '' );
+
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getOpenButtonText() {
+
+		return $this::s()->options->get( 'shortcodes/openBtnText', '' );
 
 	}
 

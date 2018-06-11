@@ -50,6 +50,21 @@ class TabBasics extends AdminPageTab {
 				'tab_slug'          =>  $this->tabSlug,
 			),
 			array(
+				'section_id'        =>  'shortcodes',
+				'title'             =>  __( 'Shortcodes', 'tmc_sp' ),
+				'page_slug'         =>  $this->pageSlug,
+				'tab_slug'          =>  $this->tabSlug,
+				'description'       =>  array(
+					sprintf( '<p>%1$s <code>[tmc_sp_open]</code></p>',
+						__( 'To display search button, use shortcode: ', 'tmc_sp' )
+					),
+					sprintf( '<p>%1$s <code>%2$s</code></p>',
+						__( 'You can trigger shortcodes in your own code like this: ', 'tmc_sp' ),
+						htmlentities( '<?php echo do_shortcode( \'[tmc_sp_open]\' ); ?>' )
+					)
+				)
+			),
+			array(
 				'section_id'        =>  'thumbnails',
 				'title'             =>  __( 'Thumbnails', 'tmc_sp' ),
 				'page_slug'         =>  $this->pageSlug,
@@ -99,6 +114,21 @@ class TabBasics extends AdminPageTab {
 				'field_id'          =>  'colorAccentPrimary',
 				'type'              =>  'color',
 				'title'             =>  __( 'Primary accent',   'tmc_sp' )
+			)
+		);
+
+		$this->pageFactory->addSettingFields(
+			'shortcodes',
+			array(
+				'field_id'          =>  'openBtnIcon',
+				'type'              =>  'image',
+				'title'             =>  __( 'Open button icon', 'tmc_sp' )
+			),
+			array(
+				'field_id'          =>  'openBtnText',
+				'type'              =>  'text',
+				'title'             =>  __( 'Open button text', 'tmc_sp' ),
+				'tip'               =>  __( 'If the icon is not set, this text will be displayed instead of.', 'tmc_sp' )
 			)
 		);
 

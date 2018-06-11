@@ -1,6 +1,7 @@
 <?php
 namespace tmc\sp\src\Components;
 use shellpress\v1_2_4\src\Shared\Components\IComponent;
+use tmc\sp\src\App;
 
 /**
  * @author jakubkuranda@gmail.com
@@ -40,7 +41,18 @@ class ShortCodes extends IComponent {
 	 */
 	public function getOpenPopupShortcode( $attrs ) {
 
-		return sprintf( '<span data-tmc_sp_open style="cursor: pointer;">Search &#128269;</span>' );
+		$iconUrl    = App::i()->settings->getOpenButtonIconUrl();
+		$btnText    = App::i()->settings->getOpenButtonText();
+
+		if( $iconUrl ){
+
+			return sprintf( '<span data-tmc_sp_open style="cursor: pointer; display: inline-block;"><img src="%1$s" alt="%2$s"></span>', $iconUrl, $btnText );
+
+		} else {
+
+			return sprintf( '<span data-tmc_sp_open style="cursor: pointer;">%1$s</span>', $btnText );
+
+		}
 
 	}
 
