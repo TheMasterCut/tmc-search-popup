@@ -22,7 +22,7 @@ jQuery( document ).ready( function( $ ) {
             popup.elems = {
                 "rootEl":       $( '#tmc_sp_root' ),
                 "closeEls":     $( '#tmc_sp_close' ),
-                "openEls":      $( '#adminbar-search' ),
+                "openEls":      $( '[data-tmc_sp_open]' ),
                 "formEl":       $( '#tmc_sp_form' ),
                 "submitBtnEl":  $( '#tmc_sp_submit_button' ),
                 "resultsEl":    $( '#tmc_sp_results' )

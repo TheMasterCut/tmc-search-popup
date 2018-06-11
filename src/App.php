@@ -11,6 +11,7 @@ use shellpress\v1_2_4\ShellPress;
 use tmc\sp\src\Components\Display;
 use tmc\sp\src\Components\License;
 use tmc\sp\src\Components\Settings;
+use tmc\sp\src\Components\ShortCodes;
 use tmc\sp\src\Components\Updates;
 use tmc_sp_apf;
 
@@ -21,6 +22,9 @@ class App extends ShellPress {
 
 	/** @var Settings */
 	public $settings;
+
+	/** @var ShortCodes */
+	public $shortcodes;
 
 	/**
 	 * Called automatically after core is ready.
@@ -41,6 +45,7 @@ class App extends ShellPress {
 
 		$this->settings = new Settings( $this );
 		$this->license = new License( $this );
+		$this->shortCodes = new ShortCodes( $this );
 
 		new Updates( $this );
 		new Display( $this );
