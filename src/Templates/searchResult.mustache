@@ -3,13 +3,15 @@
 
         {{{titleRendered}}}
 
-        {{#hasThumb}}
-            <a class="thumb {{thumbPos}}" href="{{url}}">
-                <img src="{{thumbUrl}}" alt="">
-            </a>
-        {{/hasThumb}}
+        <div class="excerpt">
+            {{#hasThumb}}
+                <a class="thumb {{thumbPos}}" href="{{url}}">
+                    <img src="{{thumbUrl}}" alt="">
+                </a>
+            {{/hasThumb}}
 
-        <div class="excerpt">{{{excerpt}}}</div>
+            {{{excerpt}}}
+        </div>
 
     </div>
 {{/results}}
