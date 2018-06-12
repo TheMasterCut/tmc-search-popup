@@ -169,19 +169,19 @@ class Display extends IComponent {
 
 		        $query->the_post();
 
-		        $thumbUrl   = get_the_post_thumbnail_url( null, 'thumbnail' );
-		        $thumbPos   = App::i()->settings->getThumbnailsPosition();
-		        $excerpt    = has_excerpt() ? get_the_excerpt() : wp_trim_excerpt();
+		        //  Messy stuff.
+
+		        $thumbUrl       = get_the_post_thumbnail_url( null, 'thumbnail' );
+		        $thumbPos       = App::i()->settings->getThumbnailsPosition();
+		        $excerpt        = has_excerpt() ? get_the_excerpt() : wp_trim_excerpt();
+		        $titleTag       = App::i()->settings->getResultTitleTag();
+		        $titleRendered  = "<{$titleTag}>" . get_the_title() . "</{$titleTag}>";
+
+		        //  Nice, packed data.
 
 		        $templateData['results'][] = array(
 			        'title'         =>  get_the_title(),
-			        'titleRendered' =>  function(){
-			            return sprintf( '<%1$s class="title" href="%2$s">%3$s</%1$s>',
-                            App::i()->settings->getResultTitleTag(),
-				            get_the_permalink(),
-				            get_the_title()
-                        );
-                    },
+			        'titleRendered' =>  $titleRendered,
 			        'excerpt'       =>  strip_shortcodes( $excerpt ),
 			        'url'           =>  get_the_permalink(),
 			        'hasThumb'      =>  $thumbUrl && $thumbPos,
