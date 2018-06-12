@@ -151,7 +151,8 @@ class Display extends IComponent {
 
         $query = new WP_Query( array(
             'post_type'     =>  App::i()->settings->getSupportedPostTypes(),
-            's'             =>  sanitize_text_field( $_REQUEST['search'] )
+            's'             =>  sanitize_text_field( $_REQUEST['search'] ),
+            'post_status'   =>  'publish',
         ) );
 
         //  ----------------------------------------
