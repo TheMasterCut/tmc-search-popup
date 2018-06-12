@@ -19,7 +19,7 @@ class Updates extends IComponent {
 	 */
 	protected function onSetUp() {
 
-		$this::s()->update->setFeedSource( 'https://raw.githubusercontent.com/dualjack/tmc-search-popup/master/updates.json' );
+		$this::s()->update->setFeedSource( 'https://raw.githubusercontent.com/TheMasterCut/tmc-search-popup/master/updates.json' );
 
 		if( ! App::i()->license->isActive() ){
 			$this::s()->update->disableUpdateOfPackage();

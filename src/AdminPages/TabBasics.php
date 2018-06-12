@@ -8,6 +8,7 @@ namespace tmc\sp\src\AdminPages;
  */
 
 use shellpress\v1_2_4\src\Shared\AdminPageFramework\AdminPageTab;
+use tmc\sp\src\App;
 use WP_Post_Type;
 
 class TabBasics extends AdminPageTab {
@@ -31,6 +32,22 @@ class TabBasics extends AdminPageTab {
 	 * Called while current component is loaded.
 	 */
 	public function load() {
+
+		//  ----------------------------------------
+		//  License info
+		//  ----------------------------------------
+
+		if( ! App::i()->license->getKey() ){
+
+			$this->pageFactory->setAdminNotice(
+				sprintf( '<a href="%1$s">%2$s</a>',
+					add_query_arg( 'tab', 'tools' ),
+					__( 'Search engine needs active license to work properly.', 'tmc_sp' )
+				),
+				'notice-info'
+			);
+
+		}
 
 		//  ----------------------------------------
 		//  Sections
@@ -57,6 +74,9 @@ class TabBasics extends AdminPageTab {
 				'description'       =>  array(
 					sprintf( '<p>%1$s <code>[tmc_sp_open]</code></p>',
 						__( 'To display search button, use shortcode: ', 'tmc_sp' )
+					),
+					sprintf( '<p>%1$s</p>',
+						__( 'This shortcode will work even in built in WordPress navigation menus.', 'tmc_sp' )
 					),
 					sprintf( '<p>%1$s <code>%2$s</code></p>',
 						__( 'You can trigger shortcodes in your own code like this: ', 'tmc_sp' ),
@@ -114,6 +134,11 @@ class TabBasics extends AdminPageTab {
 				'field_id'          =>  'colorAccentPrimary',
 				'type'              =>  'color',
 				'title'             =>  __( 'Primary accent',   'tmc_sp' )
+			),
+			array(
+				'field_id'          =>  'colorAccentSecondary',
+				'type'              =>  'color',
+				'title'             =>  __( 'Secondary accent',   'tmc_sp' )
 			)
 		);
 
@@ -128,7 +153,7 @@ class TabBasics extends AdminPageTab {
 				'field_id'          =>  'openBtnText',
 				'type'              =>  'text',
 				'title'             =>  __( 'Open button text', 'tmc_sp' ),
-				'tip'               =>  __( 'If the icon is not set, this text will be displayed instead of.', 'tmc_sp' )
+				'tip'               =>  __( 'If the icon is not set or could not be loaded, this text will be displayed instead of.', 'tmc_sp' )
 			)
 		);
 

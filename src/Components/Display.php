@@ -9,7 +9,6 @@ namespace tmc\sp\src\Components;
 
 use shellpress\v1_2_4\src\Shared\Components\IComponent;
 use tmc\sp\src\App;
-use WP_Post;
 use WP_Query;
 use WP_Term;
 
@@ -78,10 +77,10 @@ class Display extends IComponent {
 
                     <div class="inputs-row">
                         <div>
-                            <input type="text" name="search" autocomplete="off" id="tmc_sp_input_text" class="input-text" placeholder="I am looking for...">
+                            <input type="text" name="search" autocomplete="off" id="tmc_sp_input_text" class="input-text" placeholder="<?php echo App::i()->settings->getSearchPlaceholder(); ?>">
                         </div>
                         <div>
-                            <input type="submit" class="input-button" id="tmc_sp_submit_button" data-loadingText="Searching..." value="Search">
+                            <input type="submit" class="input-button" id="tmc_sp_submit_button" data-loadingText="<?php echo App::i()->settings->getSearchButtonLoadingText(); ?>" value="<?php echo App::i()->settings->getSearchButtonText(); ?>">
                         </div>
                     </div>
                 </form>
@@ -125,6 +124,7 @@ class Display extends IComponent {
                 border-bottom-color:    <?php echo App::i()->settings->getColorAccentPrimary(); ?>;
             }
             #tmc_sp_submit_button {
+                color:                  <?php echo App::i()->settings->getColorAccentSecondary(); ?>;
                 background-color:       <?php echo App::i()->settings->getColorAccentPrimary(); ?>;
             }
             #tmc_sp_close:before,
@@ -163,24 +163,28 @@ class Display extends IComponent {
             'noResultsText'     =>  App::i()->settings->getNoResultsFoundText()
         );
 
-        while( $query->have_posts() ){
+        if( App::i()->license->isActive() ){    //  Enable searching only with active license.
 
-            $query->the_post();
+	        while( $query->have_posts() ){
 
-            $thumbUrl   = get_the_post_thumbnail_url( null, 'thumbnail' );
-            $thumbPos   = App::i()->settings->getThumbnailsPosition();
-            $excerpt    = has_excerpt() ? get_the_excerpt() : wp_trim_excerpt();
+		        $query->the_post();
 
-            $templateData['results'][] = array(
-                'title'         =>  get_the_title(),
-                'excerpt'       =>  strip_shortcodes( $excerpt ),
-                'url'           =>  get_the_permalink(),
-                'hasThumb'      =>  $thumbUrl && $thumbPos,
-                'thumbUrl'      =>  $thumbUrl,
-                'thumbPos'      =>  $thumbPos
-            );
+		        $thumbUrl   = get_the_post_thumbnail_url( null, 'thumbnail' );
+		        $thumbPos   = App::i()->settings->getThumbnailsPosition();
+		        $excerpt    = has_excerpt() ? get_the_excerpt() : wp_trim_excerpt();
 
-            wp_reset_postdata();
+		        $templateData['results'][] = array(
+			        'title'         =>  get_the_title(),
+			        'excerpt'       =>  strip_shortcodes( $excerpt ),
+			        'url'           =>  get_the_permalink(),
+			        'hasThumb'      =>  $thumbUrl && $thumbPos,
+			        'thumbUrl'      =>  $thumbUrl,
+			        'thumbPos'      =>  $thumbPos
+		        );
+
+		        wp_reset_postdata();
+
+	        }
 
         }
 

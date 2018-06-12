@@ -2,7 +2,7 @@
     <div class="result">
 
         <a class="title" href="{{url}}">
-            <h3>{{title}}</h3>
+            <h3>{{{title}}}</h3>
         </a>
 
         {{#hasThumb}}
@@ -11,12 +11,12 @@
             </a>
         {{/hasThumb}}
 
-        <div class="excerpt">{{excerpt}}</div>
+        <div class="excerpt">{{{excerpt}}}</div>
 
     </div>
 {{/results}}
 {{^results}}
     <div class="empty-result">
-        {{noResultsText}}
+        {{{noResultsText}}}
     </div>
 {{/results}}

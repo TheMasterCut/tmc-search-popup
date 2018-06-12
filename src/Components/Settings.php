@@ -33,7 +33,8 @@ class Settings extends IComponent {
 				'appearance'                    =>  array(
 					'bgColor'                       =>  '#ffffff',
 					'textColor'                     =>  '#000000',
-					'colorAccentPrimary'            =>  '#2c3e50'
+					'colorAccentPrimary'            =>  '#2c3e50',
+					'colorAccentSecondary'          =>  '#ffffff'
 				),
 				'thumbnails'                    =>  array(
 					'position'                      =>  'right'
@@ -75,6 +76,15 @@ class Settings extends IComponent {
 	public function getColorAccentPrimary() {
 
 		return $this::s()->options->get( 'appearance/colorAccentPrimary' );
+
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getColorAccentSecondary() {
+
+		return $this::s()->options->get( 'appearance/colorAccentSecondary' );
 
 	}
 
