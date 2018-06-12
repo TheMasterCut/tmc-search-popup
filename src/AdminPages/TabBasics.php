@@ -174,6 +174,20 @@ class TabBasics extends AdminPageTab {
 		$this->pageFactory->addSettingFields(
 			'content',
 			array(
+				'field_id'          =>  'resultTitleTag',
+				'type'              =>  'select',
+				'title'             =>  __( 'Result header tag', 'tmc_sp' ),
+				'label'             =>  array(
+					'h1'                =>  'h1',
+					'h2'                =>  'h2',
+					'h3'                =>  'h3',
+					'h4'                =>  'h4',
+					'h5'                =>  'h5',
+					'h6'                =>  'h6',
+				),
+				'default'           =>  'h2'
+			),
+			array(
 				'field_id'          =>  'inputSearchTextPlaceholder',
 				'type'              =>  'text',
 				'title'             =>  __( 'Search placeholder', 'tmc_sp' ),

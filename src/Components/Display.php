@@ -175,6 +175,13 @@ class Display extends IComponent {
 
 		        $templateData['results'][] = array(
 			        'title'         =>  get_the_title(),
+			        'titleRendered' =>  function(){
+			            return sprintf( '<%1$s class="title" href="%2$s">%3$s</%1$s>',
+                            App::i()->settings->getResultTitleTag(),
+				            get_the_permalink(),
+				            get_the_title()
+                        );
+                    },
 			        'excerpt'       =>  strip_shortcodes( $excerpt ),
 			        'url'           =>  get_the_permalink(),
 			        'hasThumb'      =>  $thumbUrl && $thumbPos,

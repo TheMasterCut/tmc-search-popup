@@ -40,6 +40,7 @@ class Settings extends IComponent {
 					'position'                      =>  'right'
 				),
 				'content'                       =>  array(
+					'resultTitleTag'                =>  'h2',
 					'inputSearchTextPlaceholder'    =>  __( 'I am looking for...', 'tmc_sp' ),
 					'inputSearchButtonText'         =>  __( 'Search', 'tmc_sp' ),
 					'inputSearchButtonLoadingText'  =>  __( 'Searching...', 'tmc_sp' ),
@@ -57,7 +58,7 @@ class Settings extends IComponent {
 	 */
 	public function getBackgroundColor() {
 
-		return $this::s()->options->get( 'appearance/bgColor' );
+		return $this::s()->options->get( 'appearance/bgColor', '#ffffff' );
 
 	}
 
@@ -66,7 +67,7 @@ class Settings extends IComponent {
 	 */
 	public function getTextColor() {
 
-		return $this::s()->options->get( 'appearance/textColor' );
+		return $this::s()->options->get( 'appearance/textColor', '#000000' );
 
 	}
 
@@ -75,7 +76,7 @@ class Settings extends IComponent {
 	 */
 	public function getColorAccentPrimary() {
 
-		return $this::s()->options->get( 'appearance/colorAccentPrimary' );
+		return $this::s()->options->get( 'appearance/colorAccentPrimary', '#000000' );
 
 	}
 
@@ -84,7 +85,16 @@ class Settings extends IComponent {
 	 */
 	public function getColorAccentSecondary() {
 
-		return $this::s()->options->get( 'appearance/colorAccentSecondary' );
+		return $this::s()->options->get( 'appearance/colorAccentSecondary', '#ffffff' );
+
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getResultTitleTag() {
+
+		return $this::s()->options->get( 'content/resultTitleTag', 'h2' );
 
 	}
 
