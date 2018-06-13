@@ -34,20 +34,10 @@ class TabBasics extends AdminPageTab {
 	public function load() {
 
 		//  ----------------------------------------
-		//  License info
+		//  Actions
 		//  ----------------------------------------
 
-		if( ! App::i()->license->getKey() ){
-
-			$this->pageFactory->setAdminNotice(
-				sprintf( '<a href="%1$s">%2$s</a>',
-					add_query_arg( 'tab', 'tools' ),
-					__( 'Search engine needs active license to work properly.', 'tmc_sp' )
-				),
-				'notice-info'
-			);
-
-		}
+		add_action( 'admin_notices',        array( $this, '_a_displayLicenseNotification' ) );
 
 		//  ----------------------------------------
 		//  Sections
@@ -257,6 +247,28 @@ class TabBasics extends AdminPageTab {
 		}
 
 		return $postTypes;
+
+	}
+
+	//  ================================================================================
+	//  ACTIONS
+	//  ================================================================================
+
+	/**
+	 * Called on admin_notices.
+	 *
+	 * @return void
+	 */
+	public function _a_displayLicenseNotification() {
+
+		if( App::i()->license->getKey() ) return;
+
+		$linkHtml = sprintf( '<a href="%1$s">%2$s</a>',
+			add_query_arg( 'tab', 'tools' ),
+			__( 'Search engine needs active license to work properly.', 'tmc_sp' )
+		);
+
+		printf( '<div class="notice notice-error tmc-notice is-dismissible"><p>%1$s</p></div>', $linkHtml );
 
 	}
 

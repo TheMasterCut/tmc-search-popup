@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Search Popup TMC
  * Description: Easy to setup, lightweight front-end search solution.
- * Version:     1.0.6
+ * Version:     1.0.7
  * Plugin URI:  https://themastercut.co
  * Author URI:  https://themastercut.co
  * Author:      TheMasterCut.co
@@ -45,4 +45,4 @@ use tmc\sp\src\App;
 require_once( __DIR__ . '/lib/ShellPress/ShellPress.php' );
 require_once( __DIR__ . '/src/App.php' );
 
-App::initShellPress( __FILE__, 'tmc_sp', '1.0.6' );   //  <--- Remember to always change version here
+App::initShellPress( __FILE__, 'tmc_sp', '1.0.7' );   //  <--- Remember to always change version here
