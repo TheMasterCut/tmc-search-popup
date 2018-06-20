@@ -1,5 +1,6 @@
 <?php
 
+use tmc\sp\src\AdminPages\TabAnalytics;
 use tmc\sp\src\AdminPages\TabBasics;
 use tmc\sp\src\AdminPages\TabTools;
 use tmc\sp\src\App;
@@ -34,6 +35,7 @@ class tmc_sp_apf extends TMC_v1_0_3_AdminPageFramework {
 		//  ----------------------------------------
 
 		new TabBasics( $this, 'tmc_sp_settings', 'basics' );
+		new TabAnalytics( $this, 'tmc_sp_settings', 'analytics' );
 		new TabTools( $this, 'tmc_sp_settings', 'tools' );
 
 	}

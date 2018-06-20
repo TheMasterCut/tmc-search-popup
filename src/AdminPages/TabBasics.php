@@ -18,6 +18,10 @@ class TabBasics extends AdminPageTab {
 	 */
 	public function setUp() {
 
+		//  ----------------------------------------
+		//  Definition
+		//  ----------------------------------------
+
 		$this->pageFactory->addInPageTab(
 			array(
 				'page_slug'     =>  $this->pageSlug,
