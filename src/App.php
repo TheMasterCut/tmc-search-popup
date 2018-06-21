@@ -8,6 +8,7 @@ namespace tmc\sp\src;
  */
 
 use shellpress\v1_2_4\ShellPress;
+use tmc\sp\src\Components\Analytics;
 use tmc\sp\src\Components\Display;
 use tmc\sp\src\Components\License;
 use tmc\sp\src\Components\Settings;
@@ -49,6 +50,7 @@ class App extends ShellPress {
 
 		new Updates( $this );
 		new Display( $this );
+		new Analytics( $this );
 
 		//  ----------------------------------------
 		//  Options pages

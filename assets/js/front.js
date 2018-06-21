@@ -7,6 +7,7 @@ jQuery( document ).ready( function( $ ) {
             "closeEls":         null,   //  Close buttons.
             "openEls":          null,   //  Open buttons.
             "formEl":           null,   //  Form.
+            "inputTextEl":      null,   //  Form input text search.
             "submitBtnEl":      null,   //  Main submit.
             "resultsEl":        null    //  Results div.
         },
@@ -24,6 +25,7 @@ jQuery( document ).ready( function( $ ) {
                 "closeEls":     $( '#tmc_sp_close' ),
                 "openEls":      $( '[data-tmc_sp_open]' ),
                 "formEl":       $( '#tmc_sp_form' ),
+                "inputTextEl":  $( '#tmc_sp_input_text' ),
                 "submitBtnEl":  $( '#tmc_sp_submit_button' ),
                 "resultsEl":    $( '#tmc_sp_results' )
             }
@@ -108,6 +110,12 @@ jQuery( document ).ready( function( $ ) {
 
             popup.elems.submitBtnEl.prop( 'disabled', true ).val( popup.elems.submitBtnEl.attr( 'data-loadingText' ) );
             popup.elems.rootEl.removeClass( 'has-results' );
+
+            //  Send Google analytics action
+
+            if( typeof ga === 'function' ){ //  Is it loaded?
+                ga( 'send', 'pageview', '?s=' + popup.elems.inputTextEl.val() );
+            }
 
             //  Make request.
 

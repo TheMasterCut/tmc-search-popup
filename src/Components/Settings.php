@@ -45,6 +45,9 @@ class Settings extends IComponent {
 					'inputSearchButtonText'         =>  __( 'Search', 'tmc_sp' ),
 					'inputSearchButtonLoadingText'  =>  __( 'Searching...', 'tmc_sp' ),
 					'noResultsFoundText'            =>  __( 'No results found.', 'tmc_sp' ),
+				),
+				'analytics'                     =>  array(
+					'type'                          =>  'disabled'
 				)
 			)
 		);
@@ -183,6 +186,15 @@ class Settings extends IComponent {
 	public function getOpenButtonText() {
 
 		return $this::s()->options->get( 'shortcodes/openBtnText', '' );
+
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAnalyticsType() {
+
+		return $this::s()->options->get( 'analytics/type' );
 
 	}
 

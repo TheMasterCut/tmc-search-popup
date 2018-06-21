@@ -10,6 +10,7 @@ namespace tmc\sp\src\AdminPages;
 use shellpress\v1_2_4\src\Shared\AdminPageFramework\AdminPageTab;
 use tmc\sp\src\App;
 use TMC_v1_0_3_RadioRevealFieldType;
+use TMC_v1_0_3_ToggleCustomFieldType;
 
 class TabAnalytics extends AdminPageTab {
 
@@ -43,10 +44,28 @@ class TabAnalytics extends AdminPageTab {
 
 		$this->pageFactory->addSettingSections(
 			array(
-				'section_id'        =>  'analytics',
-				'title'             =>  __( 'Analytics', 'tmc_sp' ),
+				'section_id'        =>  'googleAnalytics',
+				'title'             =>  'Google Analytics',
 				'page_slug'         =>  $this->pageSlug,
 				'tab_slug'          =>  $this->tabSlug,
+				'description'       =>  array(
+					__( 'This plugin uses existing GA script to send "pageview" event every time someone uses search form.', 'tmc_sp' ),
+					sprintf( __( 'You need to load javascript %1$s or by using %2$s.', 'tmc_sp' ),
+						sprintf( '<a href="%1$s" target="_blank">%2$s</a>',
+							'https://developers.google.com/analytics/devguides/collection/analyticsjs/',
+							__( 'manually', 'tmc_sp' )
+						),
+						sprintf( '<a href="%1$s" target="_blank">%2$s</a>',
+							'https://wordpress.org/plugins/ga-google-analytics/',
+							__( 'plugin', 'tmc_sp' )
+						)
+					),
+					__( 'Your results will be visible under page visits as a typical url with default WordPress search parameter.', 'tmc_sp' ),
+					sprintf( '%1$s: <code>%2$s</code>',
+						__( 'Example', 'tmc_sp' ),
+						add_query_arg( array( 's' => 'hello' ), get_home_url() )
+					)
+				)
 			),
 			array(
 				'section_id'        =>  'submit',
@@ -61,22 +80,13 @@ class TabAnalytics extends AdminPageTab {
 		//  ----------------------------------------
 
 		App::s()->requireFile( 'lib/tmc-admin-page-framework/custom-field-types/radio-reveal-field-type/RadioRevealFieldType.php', 'TMC_v1_0_3_RadioRevealFieldType' );
+		App::s()->requireFile( 'lib/tmc-admin-page-framework/custom-field-types/toggle-custom-field-type/ToggleCustomFieldType.php', 'TMC_v1_0_3_ToggleCustomFieldType' );
 
 		new TMC_v1_0_3_RadioRevealFieldType();
+		new TMC_v1_0_3_ToggleCustomFieldType();
 
 		$this->pageFactory->addSettingFields(
-			'analytics',
-			array(
-				'field_id'          =>  'type',
-				'title'             =>  __( 'Type', 'tmc_sp' ),
-				'type'              =>  'radioreveal',
-				'label'             =>  array(
-					'0'                 =>  __( 'Disabled', 'tmc_sp' ),
-					'google'            =>  __( 'Google Analytics', 'tmc_sp' ),
-					'internal'          =>  __( 'Internal database', 'tmc_sp' ),
-					'both'              =>  __( 'Both', 'tmc_sp' )
-				)
-			)
+			'googleAnalytics'
 		);
 
 	}
