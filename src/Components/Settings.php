@@ -46,9 +46,7 @@ class Settings extends IComponent {
 					'inputSearchButtonLoadingText'  =>  __( 'Searching...', 'tmc_sp' ),
 					'noResultsFoundText'            =>  __( 'No results found.', 'tmc_sp' ),
 				),
-				'analytics'                     =>  array(
-					'type'                          =>  'disabled'
-				)
+				'googleAnalytics'               =>  array()
 			)
 		);
 

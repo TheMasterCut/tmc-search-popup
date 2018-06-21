@@ -18,7 +18,7 @@ class Analytics extends IComponent {
 	 */
 	protected function onSetUp() {
 
-
+		//  TODO - implement internal database collection.
 
 	}
 }
