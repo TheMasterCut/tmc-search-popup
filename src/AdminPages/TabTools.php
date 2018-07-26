@@ -7,7 +7,7 @@ namespace tmc\sp\src\AdminPages;
  * Time: 11:17
  */
 
-use shellpress\v1_2_4\src\Shared\AdminPageFramework\AdminPageTab;
+use shellpress\v1_2_6\src\Shared\AdminPageFramework\AdminPageTab;
 
 class TabTools extends AdminPageTab {
 

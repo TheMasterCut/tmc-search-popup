@@ -8,7 +8,7 @@ namespace tmc\sp\src\Components;
  * Time: 13:18
  */
 
-use shellpress\v1_2_4\src\Shared\Components\IComponent;
+use shellpress\v1_2_6\src\Shared\Components\IComponent;
 
 class Settings extends IComponent {
 

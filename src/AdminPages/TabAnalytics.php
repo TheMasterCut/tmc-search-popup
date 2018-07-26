@@ -7,7 +7,7 @@ namespace tmc\sp\src\AdminPages;
  * Time: 15:35
  */
 
-use shellpress\v1_2_4\src\Shared\AdminPageFramework\AdminPageTab;
+use shellpress\v1_2_6\src\Shared\AdminPageFramework\AdminPageTab;
 use tmc\sp\src\App;
 use TMC_v1_0_3_RadioRevealFieldType;
 use TMC_v1_0_3_ToggleCustomFieldType;

@@ -7,7 +7,7 @@ namespace tmc\sp\src;
  * Time: 12:02
  */
 
-use shellpress\v1_2_4\ShellPress;
+use shellpress\v1_2_6\ShellPress;
 use tmc\sp\src\Components\Analytics;
 use tmc\sp\src\Components\Display;
 use tmc\sp\src\Components\License;

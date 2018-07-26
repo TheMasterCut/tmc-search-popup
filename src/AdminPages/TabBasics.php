@@ -7,7 +7,7 @@ namespace tmc\sp\src\AdminPages;
  * Time: 11:05
  */
 
-use shellpress\v1_2_4\src\Shared\AdminPageFramework\AdminPageTab;
+use shellpress\v1_2_6\src\Shared\AdminPageFramework\AdminPageTab;
 use tmc\sp\src\App;
 use WP_Post_Type;
 
