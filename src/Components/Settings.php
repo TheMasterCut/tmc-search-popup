@@ -46,7 +46,11 @@ class Settings extends IComponent {
 					'inputSearchButtonLoadingText'  =>  __( 'Searching...', 'tmc_sp' ),
 					'noResultsFoundText'            =>  __( 'No results found.', 'tmc_sp' ),
 				),
-				'googleAnalytics'               =>  array()
+				'googleAnalytics'               =>  array(),
+				'internalHistory'               =>  array(
+					'isEnabled'                     =>  false,
+					'numOfMaxStoredQueries'         =>  '100'
+				)
 			)
 		);
 
@@ -193,6 +197,44 @@ class Settings extends IComponent {
 	public function getAnalyticsType() {
 
 		return $this::s()->options->get( 'analytics/type' );
+
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isInternalHistoryEnabled() {
+
+		return (bool) $this::s()->options->get( 'internalHistory/isEnabled', false );
+
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getNumOfMaxStoredQueries() {
+
+		return (int) $this::s()->options->get( 'internalHistory/numOfMaxStoredQueries', 0 );
+
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getStoredQueries() {
+
+		return (array) get_option( $this::s()->getPrefix( '_storedQueries' ), array() );
+
+	}
+
+	/**
+	 * @param array $array
+	 *
+	 * @return void
+	 */
+	public function setStoredQueries( $array ) {
+
+		update_option( $this::s()->getPrefix( '_storedQueries' ), $array );
 
 	}
 

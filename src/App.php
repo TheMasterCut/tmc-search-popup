@@ -27,6 +27,9 @@ class App extends ShellPress {
 	/** @var ShortCodes */
 	public $shortcodes;
 
+	/** @var Analytics */
+	public $analytics;
+
 	/**
 	 * Called automatically after core is ready.
 	 *
@@ -44,13 +47,13 @@ class App extends ShellPress {
 		//  Components
 		//  ----------------------------------------
 
-		$this->settings = new Settings( $this );
-		$this->license = new License( $this );
-		$this->shortCodes = new ShortCodes( $this );
+		$this->settings     = new Settings( $this );
+		$this->license      = new License( $this );
+		$this->shortCodes   = new ShortCodes( $this );
+		$this->analytics    = new Analytics( $this );
 
 		new Updates( $this );
 		new Display( $this );
-		new Analytics( $this );
 
 		//  ----------------------------------------
 		//  Options pages

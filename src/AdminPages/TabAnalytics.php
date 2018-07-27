@@ -68,6 +68,12 @@ class TabAnalytics extends AdminPageTab {
 				)
 			),
 			array(
+				'section_id'        =>  'internalHistory',
+				'title'             =>  __( 'Internal history', 'tmc_sp' ),
+				'page_slug'         =>  $this->pageSlug,
+				'tab_slug'          =>  $this->tabSlug,
+			),
+			array(
 				'section_id'        =>  'submit',
 				'page_slug'         =>  $this->pageSlug,
 				'tab_slug'          =>  $this->tabSlug,
@@ -86,7 +92,28 @@ class TabAnalytics extends AdminPageTab {
 		new TMC_v1_0_3_ToggleCustomFieldType();
 
 		$this->pageFactory->addSettingFields(
-			'googleAnalytics'
+			'internalHistory',
+			array(
+				'field_id'          =>  'isEnabled',
+				'type'              =>  'toggle',
+				'title'             =>  __( 'Store searched words', 'tmc_sp' ),
+				'theme'             =>  'light'
+			),
+			array(
+				'field_id'          =>  'numOfMaxStoredQueries',
+				'type'              =>  'number',
+				'title'             =>  __( 'Maximum number of stored queries', 'tmc_sp' )
+			)
+		);
+
+		$this->pageFactory->addSettingFields(
+			'submit',
+			array(
+				'field_id'          =>  'submit',
+				'type'              =>  'submit',
+				'save'              =>  'false',
+				'value'             =>  __( 'Update settings', 'tmc_sp' )
+			)
 		);
 
 	}

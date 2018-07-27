@@ -146,6 +146,14 @@ class Display extends IComponent {
     public function _a_submitAjaxCallback() {
 
         //  ----------------------------------------
+        //  Store searched text in database
+        //  ----------------------------------------
+
+        if( App::i()->settings->isInternalHistoryEnabled() ){
+            App::i()->analytics->addStoredQuery( sanitize_text_field( $_REQUEST['search'] ) );
+        }
+
+        //  ----------------------------------------
         //  Prepare query
         //  ----------------------------------------
 
