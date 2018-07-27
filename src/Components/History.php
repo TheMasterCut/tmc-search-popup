@@ -11,7 +11,7 @@ use shellpress\v1_2_6\src\Shared\Components\IComponent;
 use tmc\sp\src\App;
 use tmc\sp\src\Models\SearchQuery;
 
-class Analytics extends IComponent {
+class History extends IComponent {
 
 	/**
 	 * Called on creation of component.
@@ -20,7 +20,7 @@ class Analytics extends IComponent {
 	 */
 	protected function onSetUp() {
 
-		//  TODO - implement internal database collection.
+		add_action( 'wp_dashboard_setup',               array( $this, '_a_initDashboardWidget' ) );
 
 	}
 
@@ -104,6 +104,45 @@ class Analytics extends IComponent {
 	public function clearStoredQueries() {
 
 		App::i()->settings->setStoredQueries( array() );
+
+	}
+
+	//  ================================================================================
+	//  ACTIONS
+	//  ================================================================================
+
+	/**
+	 * Initializes and displays history widget.
+	 *
+	 * @internal
+	 *
+	 * @return void
+	 */
+	public function _a_initDashboardWidget() {
+
+		if( ! App::i()->settings->isInternalHistoryEnabled() ) return;  //  Bail early.
+
+		wp_add_dashboard_widget( $this::s()->getPrefix( '_historyWidget' ), __( 'Search history', 'tmc_sp' ), array( $this, '_a_printDisplayOfWidget' ) );
+
+	}
+
+	/**
+	 * @internal
+	 *
+	 * @return void
+	 */
+	public function _a_printDisplayOfWidget() {
+
+		echo '<ul style="overflow-y: scroll; max-height: 400px;">';
+
+		$allStoredQueries = $this->getAllStoredQueries();
+
+		foreach( $allStoredQueries as $query ){
+			printf( '<li><span>%1$s</span> <b style="padding-left: 20px;">( %2$s )</b></li>', $query->getText(), $query->getCount() );
+		}
+
+		echo '</ul>';
+
 
 	}
 

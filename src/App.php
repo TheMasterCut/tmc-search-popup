@@ -8,7 +8,7 @@ namespace tmc\sp\src;
  */
 
 use shellpress\v1_2_6\ShellPress;
-use tmc\sp\src\Components\Analytics;
+use tmc\sp\src\Components\History;
 use tmc\sp\src\Components\Display;
 use tmc\sp\src\Components\License;
 use tmc\sp\src\Components\Settings;
@@ -27,8 +27,8 @@ class App extends ShellPress {
 	/** @var ShortCodes */
 	public $shortcodes;
 
-	/** @var Analytics */
-	public $analytics;
+	/** @var History */
+	public $history;
 
 	/**
 	 * Called automatically after core is ready.
@@ -47,10 +47,10 @@ class App extends ShellPress {
 		//  Components
 		//  ----------------------------------------
 
-		$this->settings     = new Settings( $this );
-		$this->license      = new License( $this );
-		$this->shortCodes   = new ShortCodes( $this );
-		$this->analytics    = new Analytics( $this );
+		$this->settings   = new Settings( $this );
+		$this->license    = new License( $this );
+		$this->shortCodes = new ShortCodes( $this );
+		$this->history    = new History( $this );
 
 		new Updates( $this );
 		new Display( $this );

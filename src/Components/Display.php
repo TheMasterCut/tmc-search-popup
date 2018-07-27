@@ -150,7 +150,7 @@ class Display extends IComponent {
         //  ----------------------------------------
 
         if( App::i()->settings->isInternalHistoryEnabled() ){
-            App::i()->analytics->addStoredQuery( sanitize_text_field( $_REQUEST['search'] ) );
+            App::i()->history->addStoredQuery( sanitize_text_field( $_REQUEST['search'] ) );
         }
 
         //  ----------------------------------------
